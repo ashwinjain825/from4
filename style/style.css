@@ -1,0 +1,38 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'lato', sans-serif;
+
+}
+
+#notification_area {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    transition: width 0.5s ease;
+}
+
+.notification {
+    background-color: #444;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    font-family: sans-serif;
+    animation: slideIn 0.3s ease;
+}
+
+.notification_info { background-color: #3498db; }
+.notification_success { background-color: #2ecc71; }
+.notification_error { background-color: #e74c3c; }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
