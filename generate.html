@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate PIN</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-logo">DGIPIN</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="generate.html" class="active">Generate PIN</a></li>
+    </ul>
+    <!-- Theme toggle (same as home) -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <!-- Main content -->
+  <main class="container generator" aria-labelledby="generate-title">
+    <header>
+      <h1 id="generate-title">Generate Your Secure PIN</h1>
+    </header>
+
+    <div class="pin-display" id="pin-display" aria-live="polite">----</div>
+    <button id="generate-btn" class="btn-generate">Generate PIN</button>
+
+    <div class="controls">
+      <label for="pin-length">PIN Length:</label>
+      <select id="pin-length" aria-label="Select PIN length">
+        <option value="4">4 Digits</option>
+        <option value="6">6 Digits</option>
+        <option value="8">8 Digits</option>
+      </select>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 DGIPIN Generator | Developed by <span class="author">Your Name</span></p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
