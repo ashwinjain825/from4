@@ -1,193 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="resources/from4_icon.png"/>
-    <link rel="stylesheet" href="style/style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>From4</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link rel="icon" type="image/png" href="../resources/from4_icon.png"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to From4</title>
+  <link rel="stylesheet" href="style/style.css">
 </head>
-<div id="notification_area"></div>
 <body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-logo"><img src="../resources/from4_landscape.png" alt=""></div>
+    <ul class="nav-links">
+      <li><a href="#home"><span class="material-symbols-outlined">home</span>Home</a></li>
+      <li><a href="#what"><span class="material-symbols-outlined">info</span>About</a></li>
+      <li><a href="#services"><span class="material-symbols-outlined">build</span>Services</a></li>
+      <li><a href="#api" id="nav-api"><span class="material-symbols-outlined">code</span>API</a></li>
+    </ul>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
 
-<button id="getLocationBtn">Get Current Location</button>
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Home Section -->
+    <section id="home" class="home" aria-labelledby="home-title">
+      <header>
+        <h1 id="home-title">From4 Code Generator</h1>
+        <br>
+        <h2>Next Gen Addressing Platform for India</h2>
+        <br>
+        <p>Experience India’s next-generation digital addressing with a 4 - words code based on the Latitude and Longiude System. Our independent platform empowers precise, scalable, and privacy-focused location intelligence for seamless delivery, mapping, and logistics</p>
+      </header>
+      <br>
+      <button id="main_app_redirect_btn" class="spcl-btn" onclick="location.href='app.html'">FROM4 APP<span class="arrow">→</span></button>
+    </section>
 
-  <h1>From4</h1>
-  <input type="text" id="latByUser" placeholder="latitude">
-  <input type="text" id="longByUser" placeholder="longitude">
-  <button id="getFrom4">Find From4</button>
+    <!-- Generator Section (hidden by default) -->
+    <section id="generator" class="generator hidden" aria-labelledby="generator-title">
+      <header>
+        <h2 id="generator-title">Generate Your Secure PIN</h2>
+      </header>
+
+      <div class="pin-display" id="pin-display" aria-live="polite">----</div>
+      <button id="generate-btn" class="btn-generate">Generate PIN</button>
+
+      <div class="controls">
+        <label for="pin-length">PIN Length:</label>
+        <select id="pin-length" aria-label="Select PIN length">
+          <option value="4">4 Digits</option>
+          <option value="6">6 Digits</option>
+          <option value="8">8 Digits</option>
+        </select>
+      </div>
+    </section>
+
+
+
+    <!-- About Section -->
+     <section id="properties" class="sections" aria-labelledby="properties-title">
+      <div class="properties-subdiv">
+        <h1>Precise</h1>
+        <br>
+        <p>Pinpoints every location accurately</p>
+      </div>
+      <div class="properties-subdiv">
+        <h1>Easy</h1>
+        <br>
+        <p>Simple to use and share with others</p>
+      </div>
+      <div class="properties-subdiv">
+        <h1>Trustworthy</h1>
+        <br>
+        <p>Permanent codes that never change</p>
+      </div>
+      <div class="properties-subdiv">
+        <h1>India-wide</h1>
+        <br>
+        <p>Covers every corner of the country</p>
+      </div>
+     </section>
   
-  <p id="fetchedFrom4">Location will be fetched here</p>
-  <p id="latLongRange"></p>
+    <section id="what" class="sections" aria-labelledby="what-title">
+      <header>
+        <h2 id="what-title">What is the From4 ?</h2>
+      </header>
+      <p>
+        FROM4 is India's standardized, geo-coded addressing system that divides the entire geographical territory of India into uniform 10-meter by 10-meter units.
+      </p>
+      <br><br>
+      <div class="what-subdiv" id="what_subdiv">
+        <div>
+          <h1>Precise Location Identification</h1><br>
+          Each 4m × 4m unit gets a unique 10-digit alphanumeric code derived from latitude and longitude coordinates, ensuring precise geographic identification across India.<br>
+          <br>
+          <h1>Digital Public Infrastructure</h1><br>
+          Serves as the foundation layer for "Address as a Service" (AaaS) across the country, enabling seamless delivery of public and private services.<br>
+          <br>
+          <h1>Privacy Respecting</h1><br>
+          DIGIPIN solely represents a location and does not store any personal information, ensuring complete privacy protection for users.<br>
+        </div>
+        <div>
+          <center><h1>Technical Specifications</h1></center><br>
+          <table>
+            <tr>
+              <th>Coverage Area</th>
+              <td>63.5°-99.5°E, 2.5°-38.5°N</td>
+            </tr>
+            <tr>
+              <th>Grid Size</th>
+              <td>10m × 10m (approx.)</td>
+            </tr>
+            <tr>
+              <th>Code Length</th>
+              <td>4 words</td>
+            </tr>
+            <tr>
+              <th>Symbol Used</th>
+              <td>English Dictionary Words</td>
+            </tr>
+            <tr>
+              <th>Coordinate System</th>
+              <td>EPSG:4326 (WGS84)</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
 
+    <section id="services" class="sections" aria-labelledby="services-title">
+      <header>
+        <h2 id="services-title">Services we offer</h2>
+      </header>
+      <p>Explore the various services offered by From4.</p>
+    </section>
 
-  <!-- From4 Script -->
-  <script type="module">
-    import { words } from './scripts/dict.js'; // must exist!
+    <section id="api" class="sections" aria-labelledby="api-title">
+      <header>
+        <h2 id="api-title">Our API offerings</h2>
+      </header>
+      <b><p>Coming Soon!</p></b>
+      <p>Our From4 API will soon allow developers to integrate precise location identification into their apps and services. Using simple requests, you’ll be able to fetch From4 codes, coordinates, and location details programmatically — making location-based solutions faster and smarter</p>
+    </section>
 
-    // Base ranges
-    let latRange = [2.5, 38.5];
-    let longRange = [63.5, 99.5];
-    let rows = 36, cols = 36;
-    let myFrom4 = "";
+    <!-- Settings Section -->
+    <section id="settings" class="sections" aria-labelledby="settings-title">
+      <header>
+        <h2 id="settings-title">Settings</h2>
+      </header>
+      <p>Customize your PIN generation preferences here. (More options coming soon!)</p>
+    </section>
+  </main>
 
-    // Compute block at given level
-    function getBlock(lat, long, currentLatRange, currentLongRange, r, c) {
-      let latStep = (currentLatRange[1] - currentLatRange[0]) / r;
-      let longStep = (currentLongRange[1] - currentLongRange[0]) / c;
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 From4 Generator | Developed by <span class="author">Ashwin & Animesh with collaboration with IIITDM Kurnool</span></p>
+  </footer>
 
-      let row = Math.floor((lat - currentLatRange[0]) / latStep);
-      let col = Math.floor((long - currentLongRange[0]) / longStep);
-
-      row = Math.min(Math.max(row, 0), r - 1);
-      col = Math.min(Math.max(col, 0), c - 1);
-
-      let newLatRange = [
-        currentLatRange[0] + row * latStep,
-        currentLatRange[0] + (row + 1) * latStep
-      ];
-      let newLongRange = [
-        currentLongRange[0] + col * longStep,
-        currentLongRange[0] + (col + 1) * longStep
-      ];
-
-      let blockNum = row * c + col + 1;
-      return { blockNum, newLatRange, newLongRange };
-    }
-
-    function getWords(lat, long) {
-      let l1 = getBlock(lat, long, latRange, longRange, rows, cols);
-      let word1 = words[(l1.blockNum - 1) % words.length];
-
-      let l2 = getBlock(lat, long, l1.newLatRange, l1.newLongRange, rows, cols);
-      let word2 = words[(l2.blockNum - 1) % words.length];
-
-      let l3 = getBlock(lat, long, l2.newLatRange, l2.newLongRange, rows, cols);
-      let word3 = words[(l3.blockNum - 1) % words.length];
-
-      let l4 = getBlock(lat, long, l3.newLatRange, l3.newLongRange, 8, 8);
-      let word4 = words[(l4.blockNum - 1) % words.length];
-
-      return {
-        words: [word1, word2, word3, word4],
-        level4Range: { lat: l4.newLatRange, long: l4.newLongRange }
-      };
-    }
-
-    function fetchLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition,
-          () => alert("Failed to get location."));
-      } else {
-        alert("Geolocation not supported.");
-      }
-    }
-
-    function showPosition(position) {
-      const lat = position.coords.latitude;
-      const long = position.coords.longitude;
-      document.getElementById("latByUser").value = lat;
-      document.getElementById("longByUser").value = long;
-
-      showFrom4(lat, long);
-    }
-
-    function showFrom4(lat, long) {
-      if (isNaN(lat) || isNaN(long)) {
-        alert("Invalid latitude/longitude");
-        return;
-      }
-
-      const result = getWords(parseFloat(lat), parseFloat(long));
-      myFrom4 = result.words.join("-");
-      document.getElementById("fetchedFrom4").innerText =
-        `Words: ${myFrom4}`;
-      document.getElementById("latLongRange").innerText =
-        `Level 4 Range → Lat: ${result.level4Range.lat[0].toFixed(6)} to ${result.level4Range.lat[1].toFixed(6)}, 
-         Long: ${result.level4Range.long[0].toFixed(6)} to ${result.level4Range.long[1].toFixed(6)}`;
-    }
-
-    function findFrom4() {
-      const lat = parseFloat(document.getElementById("latByUser").value);
-      const long = parseFloat(document.getElementById("longByUser").value);
-      showFrom4(lat, long);
-    }
-
-    // Event listeners
-    document.getElementById("getLocationBtn").addEventListener("click", fetchLocation);
-    document.getElementById("getFrom4").addEventListener("click", findFrom4);
-
-
-    function from4ToCoord(word1, word2, word3, word4) {
-      const latRange = [2.5, 38.5];
-      const longRange = [63.5, 99.5];
-      const rows = 36;
-      const cols = 36;
-
-      // Helper function to find block number corresponding to a word
-      function getBlockNum(word) {
-        return words.indexOf(word) + 1;
-      }
-
-      // Helper function to compute lat/long ranges for a block number within given ranges and grid size
-      function getBlockLatLongRange(blockNum, currentLatRange, currentLongRange, r, c) {
-        const latStep = (currentLatRange[1] - currentLatRange[0]) / r;
-        const longStep = (currentLongRange[1] - currentLongRange[0]) / c;
-
-        const row = Math.floor((blockNum - 1) / c);
-        const col = (blockNum - 1) % c;
-
-        return {
-          newLatRange: [
-            currentLatRange[0] + row * latStep,
-            currentLatRange[0] + (row + 1) * latStep
-          ],
-          newLongRange: [
-            currentLongRange[0] + col * longStep,
-            currentLongRange[0] + (col + 1) * longStep
-          ]
-        };
-      }
-
-      const start = performance.now();
-
-      // Iteratively compute the ranges for each word level
-      const b1 = getBlockNum(word1);
-      const l1 = getBlockLatLongRange(b1, latRange, longRange, rows, cols);
-
-      const b2 = getBlockNum(word2);
-      const l2 = getBlockLatLongRange(b2, l1.newLatRange, l1.newLongRange, rows, cols);
-
-      const b3 = getBlockNum(word3);
-      const l3 = getBlockLatLongRange(b3, l2.newLatRange, l2.newLongRange, rows, cols);
-
-      const b4 = getBlockNum(word4);
-      const l4 = getBlockLatLongRange(b4, l3.newLatRange, l3.newLongRange, 8, 8);
-
-      // Calculate averages
-      const avgLat = (l4.newLatRange[0] + l4.newLatRange[1]) / 2;
-      const avgLong = (l4.newLongRange[0] + l4.newLongRange[1]) / 2;
-
-      const end = performance.now();
-
-      return {
-        latRange: l4.newLatRange,
-        longRange: l4.newLongRange,
-        avgLat: avgLat,
-        avgLong: avgLong,
-        debugTimeMs: end - start,
-        word1,
-        word2,
-        word3,
-        word4
-      };
-    }
-
-  </script>
-    
+  <!-- JavaScript -->
+  <script src="scripts/css.js"></script>
 </body>
-
-
-
-<script src="scripts/alert.js"></script>
 </html>

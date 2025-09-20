@@ -1,38 +1,489 @@
-*{
-    padding: 0;
+/* ============================= */
+/* GLOBAL STYLES */
+/* ============================= */
+* {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    transition: .3s ease;
+}
+
+body {
     font-family: 'lato', sans-serif;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.spcl-btn{
+    background: linear-gradient(90deg, #ff1a75 0%, #ff7f2a 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.spcl-btn:hover {
+  background: linear-gradient(90deg, #ff4f9e 0%, #ff944d 100%);
+}
+
+
+
+.spcl-btn .arrow {
+  border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 6px;
+    transform: rotate(-45deg);
+    margin-left: 5px;
+    font-size: 10px;
+}
+
+/* ============================= */
+/* THEMES */
+/* ============================= */
+
+/* Neo-Noir (Default Theme) */
+.neo-noir {
+    background-color: #1c1c1c;
+    color: #fff;
+}
+
+/* Light Theme */
+.light {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Light theme overrides */
+body.light .navbar {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+body.light .nav-logo {
+    color: #333;
+    text-shadow: none;
+}
+
+body.light .nav-links li a {
+    color: #333;
+    text-shadow: none;
+}
+
+body.light .nav-links li a:hover {
+    color: #000;
+    background-color: #ddd;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+body.light button {
+    background-color: #333;
+    border-color: #333;
+    color: #fff;
+    box-shadow: none;
+}
+
+body.light h1,
+body.light h2 {
+    color: #000000;
+    text-shadow: none;
+}
+
+body.light .sections{
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+body.light select {
+    background-color: #fff;
+    border-color: #333;
+    color: #333;
+    box-shadow: none;
+}
+
+
+/* ============================= */
+/* NAVBAR */
+/* ============================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #222;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    height: 50px;
+}
+
+.nav-logo {
+    width: 150px;
+    color: #0ff;
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    cursor: pointer;
+    margin-top: 7px;
+}
+
+.nav-logo  img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    
 
 }
 
-#notification_area {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    padding: 0.7rem 1.2rem; /* adjusted for better height */
+    display: flex; /* flexbox alignment */
+    align-items: center; /* vertical centering */
+    gap: 6px; /* spacing between icon & text */
+    transition: 0.3s;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+}
+
+.nav-links li a span {
+    font-size: 1rem;
+    line-height: 1; /* keeps icon compact */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+
+.nav-links li a:hover {
+    color: #ff00ff;
+    background-color: #333;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.5);
+}
+
+/* ============================= */
+/* THEME TOGGLE BUTTON */
+/* ============================= */
+.theme-toggle {
+    background: none;
+    border: 2px solid #0ff;
+    color: #0ff;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: #0ff;
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 1);
+}
+
+/* ============================= */
+/* CONTENT */
+/* ============================= */
+.container {
+    margin-top: 80px;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+h1, h2 {
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 1), 0 0 20px rgba(0, 255, 255, 0.7);
+}
+
+p {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+}
+
+.sections{
+    background-color: #333;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    margin-top: 2rem;
+}
+
+/* ============================= */
+/* HOME GENERATOR */
+/* ============================= */
+
+.home header h1{
+    font-size: 4rem;
+    color: #000;
+}
+
+.home header h2{
+    font-size: 2rem;
+    color: #2d2d2d;
+}
+
+.home header p{
+    width: 80%;
+    margin: auto;
+}
+
+.generator {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 300px;
-    transition: width 0.5s ease;
+    align-items: center;
 }
 
-.notification {
-    background-color: #444;
+.generator .pin-display {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff00ff;
+    text-shadow: 0 0 15px rgba(255, 0, 255, 0.7),
+                 0 0 30px rgba(255, 0, 255, 1),
+                 0 0 50px rgba(255, 0, 255, 1);
+    margin-bottom: 1rem;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Tooltip when PIN is copied */
+.generator .pin-display::after {
+    content: "Click to copy";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: #0ff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    margin-top: 0.5rem;
+    text-shadow: 0 0 8px #0ff;
+}
+
+.generator .pin-display:hover::after {
+    opacity: 1;
+}
+
+/* Copy feedback class */
+.pin-display.copied::after {
+    content: "Copied!";
+    color: #ff0;
+    text-shadow: 0 0 8px #ff0;
+    opacity: 1;
+}
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+button {
+    padding: 1rem 2rem;
+    background-color: #ff00ff;
     color: white;
-    padding: 12px 20px;
-    border-radius: 6px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    font-family: sans-serif;
-    animation: slideIn 0.3s ease;
+    border: 2px solid #ff00ff;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 1),
+                0 0 30px rgba(255, 0, 255, 1);
+    transition: 0.3s;
 }
 
-.notification_info { background-color: #3498db; }
-.notification_success { background-color: #2ecc71; }
-.notification_error { background-color: #e74c3c; }
+button:hover {
+    background-color: #0ff;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 1),
+                0 0 30px rgba(0, 255, 255, 1);
+}
 
-@keyframes slideIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* ============================= */
+/* CONTROLS */
+/* ============================= */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    color: #ff00ff;
+}
+
+select {
+    padding: 1rem;
+    font-size: 1.2rem;
+    background-color: #222;
+    color: #fff;
+    border: 2px solid #ff00ff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+select:focus {
+    border-color: #0ff;
+    outline: none;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+footer {
+    background: linear-gradient(90deg, #03174f, #021138);
+    text-align: center;
+    font-size: 1rem;
+    color: white;
+    margin-top: 3rem;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+@media (max-width: 768px) {
+    .nav-links li {
+        display: block;
+        margin: 1rem 0;
+    }
+
+    .nav-links {
+        text-align: center;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* hidden section  */
+.hidden {
+  display: none;
+}
+
+.generator {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* ============================= */
+/* SECTION A */
+/* ============================= */
+
+#properties{
+    display: flex;
+    flex-wrap: wrap; /* allows moving to next line */
+    gap: 15px;       /* space between items */
+    justify-content: center; /* centers items */
+    padding: 20px;
+}
+
+.properties-subdiv{
+    flex: 1 1 250px; /* grow, shrink, min width */
+    max-width: 300px; 
+    min-width: 200px;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.properties-subdiv h1{
+    color: #000;
+    font-size: 2rem;
+}
+
+.properties-subdiv p{
+    color: #222;
+    font-size: 1rem;
+}
+
+#what p{
+    width: 80%;
+    text-align: center;
+    margin: auto;
+    
+}
+
+#what_subdiv {
+  display: flex;
+  flex-wrap: wrap; /* allows stacking on small screens */
+  gap: 20px;
+}
+
+#what_subdiv h1{
+    font-size: 1.5rem;
+
+}
+
+#what_subdiv > div {
+  flex: 1 1 400px; /* flexible, min 400px width */
+  background: transparent;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#what_subdiv > div:hover{
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+}
+
+#what_subdiv table {
+  width: 100%;
+  border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#what_subdiv table td,th{
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+#what_subdiv table td{
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: right;
+}
+
+#api p{
+    text-align: center;
+    width: 80%;
+    margin: auto;
 }

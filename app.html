@@ -113,7 +113,7 @@
     }
 
     // ✅ Initialize map globally
-    const map = L.map('map').setView([28.6139, 77.2090], 13); // New Delhi default
+    const map = L.map('map').setView([28.6139, 77.2090], 5); // New Delhi default
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -151,7 +151,7 @@
 
             // Pan smoothly to new location
             map.panTo([lat, lon]);
-
+            map.setZoom(17);
             // Add marker + address
             getAddress(lat, lon);
 
