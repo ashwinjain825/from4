@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DGIPIN Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-logo">DGIPIN</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#settings">Settings</a></li>
+      <li><a href="#generator" id="nav-generate">Generate PIN</a></li>
+    </ul>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Home Section -->
+    <section id="home" class="home" aria-labelledby="home-title">
+      <header>
+        <h1 id="home-title">DGIPIN Generator</h1>
+        <p>Generate secure PIN codes easily!</p>
+      </header>
+
+      <div class="generator-intro">
+        <a href="#generator" class="btn-generate" id="show-generator">Generate PIN</a>
+      </div>
+    </section>
+
+    <!-- Generator Section (hidden by default) -->
+    <section id="generator" class="generator hidden" aria-labelledby="generator-title">
+      <header>
+        <h2 id="generator-title">Generate Your Secure PIN</h2>
+      </header>
+
+      <div class="pin-display" id="pin-display" aria-live="polite">----</div>
+      <button id="generate-btn" class="btn-generate">Generate PIN</button>
+
+      <div class="controls">
+        <label for="pin-length">PIN Length:</label>
+        <select id="pin-length" aria-label="Select PIN length">
+          <option value="4">4 Digits</option>
+          <option value="6">6 Digits</option>
+          <option value="8">8 Digits</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about" aria-labelledby="about-title">
+      <header>
+        <h2 id="about-title">About the Project</h2>
+      </header>
+      <p>
+        This project is a simple PIN code generator created using HTML, CSS, 
+        and JavaScript with a neon aesthetic. It helps users generate secure 
+        PIN codes of varying lengths while offering a futuristic user experience 
+        with theme customization.
+      </p>
+    </section>
+
+    <!-- Settings Section -->
+    <section id="settings" class="settings" aria-labelledby="settings-title">
+      <header>
+        <h2 id="settings-title">Settings</h2>
+      </header>
+      <p>Customize your PIN generation preferences here. (More options coming soon!)</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 DGIPIN Generator | Developed by <span class="author">Your Name</span></p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
