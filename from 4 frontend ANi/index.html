@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home" />
+  <link rel="icon" type="image/png" href="../resources/from4_icon.png"/>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DGIPIN Generator</title>
+  <title>Welcome to From4</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="nav-logo">DGIPIN</div>
+    <div class="nav-logo"><img src="../resources/from4_landscape.png" alt=""></div>
     <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
+      <li><a href="#home"><span class="material-symbols-outlined">
+home
+</span>Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#settings">Settings</a></li>
       <li><a href="#generator" id="nav-generate">Generate PIN</a></li>
@@ -24,13 +28,14 @@
     <!-- Home Section -->
     <section id="home" class="home" aria-labelledby="home-title">
       <header>
-        <h1 id="home-title">DGIPIN Generator</h1>
-        <p>Generate secure PIN codes easily!</p>
+        <h1 id="home-title">From4 Code Generator</h1>
+        <br>
+        <h2>Next Gen Addressing Platform for India</h2>
+        <br>
+        <p>Experience India’s next-generation digital addressing with a 4 - words code based on the Latitude and Longiude System. Our independent platform empowers precise, scalable, and privacy-focused location intelligence for seamless delivery, mapping, and logistics</p>
       </header>
-
-      <div class="generator-intro">
-        <a href="#generator" class="btn-generate" id="show-generator">Generate PIN</a>
-      </div>
+      <br>
+      <button id="main_app_redirect_btn" class="spcl-btn">FROM4 APP<span class="arrow">→</span></button>
     </section>
 
     <!-- Generator Section (hidden by default) -->
@@ -53,20 +58,78 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about" aria-labelledby="about-title">
+     <section id="properties" class="sections" aria-labelledby="properties-title">
+      <div class="properties-subdiv">
+        <h1>Precise</h1>
+        <br>
+        <p>Pinpoints every location accurately</p>
+      </div>
+      <div class="properties-subdiv">
+        <h1>Easy</h1>
+        <br>
+        <p>Simple to use and share with others</p>
+      </div>
+      <div class="properties-subdiv">
+        <h1>Trustworthy</h1>
+        <br>
+        <p>Permanent codes that never change</p>
+      </div>
+      <div class="properties-subdiv">
+        <h1>India-wide</h1>
+        <br>
+        <p>Covers every corner of the country</p>
+      </div>
+     </section>
+  
+    <section id="what" class="sections" aria-labelledby="what-title">
       <header>
-        <h2 id="about-title">About the Project</h2>
+        <h2 id="what-title">What is the From4 ?</h2>
       </header>
       <p>
-        This project is a simple PIN code generator created using HTML, CSS, 
-        and JavaScript with a neon aesthetic. It helps users generate secure 
-        PIN codes of varying lengths while offering a futuristic user experience 
-        with theme customization.
+        FROM4 is India's standardized, geo-coded addressing system that divides the entire geographical territory of India into uniform 10-meter by 10-meter units.
       </p>
+      <br><br>
+      <div class="what-subdiv" id="what_subdiv">
+        <div>
+          <h1>Precise Location Identification</h1><br>
+          Each 4m × 4m unit gets a unique 10-digit alphanumeric code derived from latitude and longitude coordinates, ensuring precise geographic identification across India.<br>
+          <br>
+          <h1>Digital Public Infrastructure</h1><br>
+          Serves as the foundation layer for "Address as a Service" (AaaS) across the country, enabling seamless delivery of public and private services.<br>
+          <br>
+          <h1>Privacy Respecting</h1><br>
+          DIGIPIN solely represents a location and does not store any personal information, ensuring complete privacy protection for users.<br>
+        </div>
+        <div>
+          <center><h1>Technical Specifications</h1></center><br>
+          <table>
+            <tr>
+              <th>Coverage Area</th>
+              <td>63.5°-99.5°E, 2.5°-38.5°N</td>
+            </tr>
+            <tr>
+              <th>Grid Size</th>
+              <td>10m × 10m (approx.)</td>
+            </tr>
+            <tr>
+              <th>Code Length</th>
+              <td>4 words</td>
+            </tr>
+            <tr>
+              <th>Symbol Used</th>
+              <td>English Dictionary Words</td>
+            </tr>
+            <tr>
+              <th>Coordinate System</th>
+              <td>EPSG:4326 (WGS84)</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </section>
 
     <!-- Settings Section -->
-    <section id="settings" class="settings" aria-labelledby="settings-title">
+    <section id="settings" class="sections" aria-labelledby="settings-title">
       <header>
         <h2 id="settings-title">Settings</h2>
       </header>
