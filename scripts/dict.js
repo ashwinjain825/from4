@@ -130,9 +130,3 @@ export const words = [
   "lard", "leap", "lick", "limp", "loaf", "lure", "lurk", "lust", "mare", "maze",
   "mice", "mime", "mite", "mold", "moor", "mule"
 ];
-
-
-
-
-
-console.log([...new Set(words)] + " length: " + [...new Set(words)].length);

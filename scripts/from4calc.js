@@ -48,14 +48,7 @@ function getWords(lat, long) {
     };
 }
 
-function fetchLocation() {
-    if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition,
-        () => alert("Failed to get location."));
-    } else {
-    alert("Geolocation not supported.");
-    }
-}
+
 
 function showPosition(position) {
     const lat = position.coords.latitude;
