@@ -361,16 +361,7 @@ select:focus {
     outline: none;
 }
 
-/* ============================= */
-/* FOOTER */
-/* ============================= */
-footer {
-    background: linear-gradient(90deg, #03174f, #021138);
-    text-align: center;
-    font-size: 1rem;
-    color: white;
-    margin-top: 3rem;
-}
+
 
 /* ============================= */
 /* RESPONSIVE */
@@ -486,4 +477,28 @@ footer {
     text-align: center;
     width: 80%;
     margin: auto;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+footer {
+    background: linear-gradient(90deg, #049f80, #037a62);
+    font-size: 1rem;
+    color: white;
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap; /* allows items to go to next line if needed */
+    gap: 20px;       /* optional spacing between items */
+}
+
+footer > div {  /* applies to all direct footer children */
+    flex: 1;         /* equal width */
+    min-width: 250px; /* ensures they don't shrink too small */
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.footer-project img{
+    width: 100px;
 }
