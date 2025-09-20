@@ -10,27 +10,18 @@
 <div id="notification_area"></div>
 <body>
 
-<button id="getLocationBtn">Get Current Location</button>
+<button id="getLocationBtn" onclick="fetchLocation()">Get Current Location</button>
 
   <h1>From4</h1>
   <input type="text" id="latByUser" placeholder="latitude">
   <input type="text" id="longByUser" placeholder="longitude">
-  <button id="getFrom4">Find From4</button>
+  <button id="getFrom4" onclick="findFrom4()">Find From4</button>
   
   <p id="fetchedFrom4">Location will be fetched here</p>
   <p id="latLongRange"></p>
 
     
 </body>
-<script type="module">
-    import { words } from './scripts/dict.js'; // must exist!
-
-    // Base ranges
-    document.getElementById("getLocationBtn").addEventListener("click", fetchLocation);
-    document.getElementById("getFrom4").addEventListener("click", findFrom4);
-
-</script>
-
-<script src="scripts/from4calc.js"></script>
+<script type="module" src="scripts/from4calc.js"></script>
 <script src="scripts/alert.js"></script>
 </html>
