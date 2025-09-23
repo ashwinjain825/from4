@@ -1,0 +1,209 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =============================
+   THEMES
+   ============================= */
+body.neo-noir {
+  background-color: #0a0a0a;
+  color: #f8f8f8;
+  font-family: "Orbitron", Arial, sans-serif;
+  text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #00eaff;
+}
+
+body.light {
+  background-color: #f4f4f4;
+  color: #222;
+  font-family: Arial, sans-serif;
+  text-shadow: none;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, #1f1f1f, #3d3d3d);
+  color: #fff;
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #00eaff;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ff00ff;
+  text-shadow: 0 0 5px #ff00ff, 0 0 10px #00eaff;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s, text-shadow 0.3s;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.2);
+  text-shadow: 0 0 5px #ff00ff, 0 0 10px #00eaff;
+}
+
+/* Container */
+.container {
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Sections */
+section {
+  margin-bottom: 3rem;
+}
+
+h1, h2 {
+  margin-bottom: 1rem;
+  text-shadow: 0 0 5px #ff00ff, 0 0 10px #00eaff, 0 0 20px #ff00ff;
+}
+
+/* Buttons */
+.btn-generate {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  background: #ff00ff;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 5px #ff00ff, 0 0 15px #00eaff;
+}
+
+.btn-generate:hover {
+  background: #00eaff;
+  box-shadow: 0 0 10px #00eaff, 0 0 20px #ff00ff;
+}
+
+/* PIN Display */
+.pin-display {
+  margin: 2rem 0;
+  font-size: 2rem;
+  letter-spacing: 0.5rem;
+  padding: 1rem;
+  border: 2px dashed #ff00ff;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #00eaff;
+}
+
+.pin-display:hover {
+  background: rgba(255, 0, 255, 0.1);
+  box-shadow: 0 0 15px #ff00ff, 0 0 25px #00eaff;
+}
+
+/* Controls */
+.controls {
+  margin-top: 1rem;
+  text-shadow: 0 0 5px #00eaff;
+}
+
+/* Hidden Utility */
+.hidden {
+  display: none;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #1f1f1f;
+  color: #ccc;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 10px #ff00ff, 0 -4px 20px #00eaff;
+}
+
+/* ============================= */
+/* THEMES */
+/* ============================= */
+
+/* Neo-Noir (Default Theme) */
+.neo-noir {
+    background-color: #0a0a0a; /* darker black for neon contrast */
+    color: #e0e0e0;
+    font-family: 'Orbitron', 'Arial', sans-serif;
+}
+
+/* Glow effect for headings in neo-noir */
+body.neo-noir h1, 
+body.neo-noir h2 {
+    color: #ff00ff;
+    text-shadow: 
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 40px #00eaff,
+        0 0 80px #00eaff;
+}
+
+/* Paragraph glow */
+body.neo-noir p {
+    color: #e0e0e0;
+    text-shadow: 
+        0 0 5px #ff00ff,
+        0 0 10px #00eaff;
+}
+
+/* Navbar glow */
+body.neo-noir .navbar {
+    background: #111;
+    box-shadow: 
+        0 0 10px #ff00ff,
+        0 0 20px #00eaff;
+}
+
+/* Buttons glow */
+body.neo-noir button, 
+body.neo-noir .btn-generate {
+    background-color: #ff00ff;
+    border: 2px solid #ff00ff;
+    color: #fff;
+    box-shadow: 
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 30px #00eaff;
+}
+
+body.neo-noir button:hover, 
+body.neo-noir .btn-generate:hover {
+    background-color: #00eaff;
+    border-color: #00eaff;
+    color: #000;
+    box-shadow: 
+        0 0 15px #00eaff,
+        0 0 30px #ff00ff;
+}
+
+/* Footer glow */
+body.neo-noir footer {
+    color: #ccc;
+    text-shadow: 
+        0 0 5px #ff00ff,
+        0 0 15px #00eaff;
+}
