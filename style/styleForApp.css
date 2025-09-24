@@ -2,15 +2,21 @@
     --ui-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; 
 }
 
+html{
+    width: 100%;
+    height: 100vh;
+}
+
 #map{
     height: 100%;
     width: 100%;
-    position: fixed;
+    top: 0;
     z-index: 1;
 }
   
 
 body { 
+    height: 100vh;
     font-family: var(--ui-font); 
 }
 
@@ -53,23 +59,24 @@ body {
 
 .content {
     background: rgba(255, 255, 255, 0.6); /* translucent white */
-  backdrop-filter: blur(10px);           /* blur the content behind */
-  -webkit-backdrop-filter: blur(5px);   /* for Safari */
-    z-index: 3;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;              /* move to horizontal center */
-  transform: translateX(-50%); /* shift back by half width */
-  
-  width: 50%;
-  margin: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  font-size: 1.2rem;
-  font-weight: bold;
-  justify-content: center; /* centers inner content horizontally */
-  align-items: center;     /* centers inner content vertically */
+    backdrop-filter: blur(10px);           /* blur the content behind */
+    -webkit-backdrop-filter: blur(5px);   /* for Safari */
+        z-index: 3;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;              /* move to horizontal center */
+    transform: translateX(-50%); /* shift back by half width */
+    
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    font-size: 1.2rem;
+    font-weight: bold;
+    justify-content: center; /* centers inner content horizontally */
+    align-items: center;     /* centers inner content vertically */
 }
+
+
 
 .content-menu{
     padding-top: 5px;
@@ -122,5 +129,63 @@ body {
 .black-btn:hover{
     opacity: 80%;
 }
+
+.select-style{
+    width: 30%;
+    min-width: 200px;
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+#search_location{
+    width: 100%;
+    display: flex;
+
+}
+
+#search_location input{
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    width: calc(30% - 20px);
+}
+
+.result{
+    background: rgba(255, 255, 255, 0.6); /* translucent white */
+    backdrop-filter: blur(10px);           /* blur the content behind */
+    -webkit-backdrop-filter: blur(5px);   /* for Safari */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.saved-item{
+    display: flex;
+    
+    justify-content: space-between;
+    align-content: baseline;
+    align-items: center;
+}
+
+#saved_location{
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    max-height: 100%;
+}
+
+
 
 
