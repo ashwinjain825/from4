@@ -30,12 +30,15 @@ body {
 }
 
 .header{
+    background: rgba(255, 255, 255, 0.6); /* translucent white */
+    backdrop-filter: blur(10px);           /* blur the content behind */
+    -webkit-backdrop-filter: blur(5px);
+
     z-index: 2;
     position: absolute;
     top: 20px;
     left: 20px;
     border-radius: 10px;
-    background-color: white;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     font-size: 1.2rem;
@@ -101,7 +104,7 @@ body {
 }
 
 .content-main{
-    height: 100px;
+    height: 130px;
     border-top: 0.5px solid rgb(145, 145, 145);
 
 }
@@ -138,11 +141,7 @@ body {
 
 }
 
-#search_location{
-    width: 100%;
-    display: flex;
 
-}
 
 #search_location input{
     margin: 5px;
@@ -184,6 +183,29 @@ body {
     flex-wrap: wrap;
     overflow-y: scroll;
     max-height: 100%;
+}
+
+.input-field-decode{
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    width: calc(25% - 20px);
+    min-width: 100px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.content-info{
+    overflow-y: scroll;
+    max-height: 100%;
+}
+
+#decode_location{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 

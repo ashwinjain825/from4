@@ -119,10 +119,10 @@
 
       <!-- Decode Tab -->
       <div id="decode_location" class="content-info" style="display:none;">
-        <input type="text" id="from4_code_to_decode_word1" placeholder="Word 1" class="input-field">
-        <input type="text" id="from4_code_to_decode_word2" placeholder="Word 2" class="input-field">
-        <input type="text" id="from4_code_to_decode_word3" placeholder="Word 3" class="input-field">
-        <input type="text" id="from4_code_to_decode_word4" placeholder="Word 4" class="input-field">
+        <input type="text" id="from4_code_to_decode_word1" placeholder="Word 1" class="input-field-decode">
+        <input type="text" id="from4_code_to_decode_word2" placeholder="Word 2" class="input-field-decode">
+        <input type="text" id="from4_code_to_decode_word3" placeholder="Word 3" class="input-field-decode">
+        <input type="text" id="from4_code_to_decode_word4" placeholder="Word 4" class="input-field-decode">
         <button class="black-btn" onclick="decodeFrom4()">Decode From4</button>
       </div>
 
@@ -136,8 +136,8 @@
   <!-- Result Section -->
   <div class="result" id="result_section">
     <p class="theResult" id="theResult">The Result</p>
-    <span class="material-symbols-outlined">content_copy</span>
-    <span class="material-symbols-outlined">share</span>
+    <span class="material-symbols-outlined" onclick="copyResult()">content_copy</span>
+    <span class="material-symbols-outlined" onclick="shareResult()">share</span>
     <span class="material-symbols-outlined" onclick="save_result()">bookmark</span>
   </div>
 
@@ -402,6 +402,31 @@
     // ✅ Button fallback
     function get_saved_data() {
       render_saved_data();
+    }
+
+    function copyResult(){
+      const resultText = document.getElementById("theResult").innerText;
+      navigator.clipboard.writeText(resultText).then(() => {
+        alert("Result copied to clipboard!");
+      }).catch(err => {
+        console.error("Failed to copy text: ", err);
+      });
+    }
+
+    function shareResult(){
+      const resultText = document.getElementById("theResult").innerText;
+      const shareText = `Hey my From 4 Code is:\n${resultText}\n\nFind yours at from4.vercel.app`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'From4 Result',
+          text: shareText,
+        }).then(() => {
+          console.log('Thanks for sharing!');
+        })
+        .catch(console.error);
+      } else {
+        alert("Web Share API not supported in this browser.");
+      }
     }
   </script>
 </body>
