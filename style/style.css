@@ -75,17 +75,8 @@ html {
 .neo-noir h4, 
 .neo-noir h5, 
 .neo-noir h6, 
-.neo-noir p, 
-.neo-noir .nav-links li a,
-.neo-noir .nav-logo,
-.neo-noir .generator .pin-display,
-.neo-noir #what_subdiv h1,
-.neo-noir #what_subdiv table td,
-.neo-noir #what_subdiv table th,
-.neo-noir #what p,
-.neo-noir #api p {
-    color: #0ff !important;
-    text-shadow: 0 0 12px #0ff, 0 0 18px #fff;
+
+
 }
 
 /* All major containers: magenta box-shadow and subtle border */
