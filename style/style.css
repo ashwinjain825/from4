@@ -64,10 +64,11 @@ html {
     background-color: #1c1c1c;
     color: #fff;
 }
-/* Neo Noir Theme Enhancements */
 
-/* Force all major text to white and add strong magenta/cyan glow */
-.neo-noir, 
+/* Enhanced Neo-Noir: Cyan Text, Magenta Boxes */
+
+/* All text: cyan with glow */
+.neo-noir,
 .neo-noir h1, 
 .neo-noir h2, 
 .neo-noir h3, 
@@ -75,90 +76,63 @@ html {
 .neo-noir h5, 
 .neo-noir h6, 
 .neo-noir p, 
-.neo-noir .sections,
-.neo-noir .properties-subdiv,
+.neo-noir .nav-links li a,
+.neo-noir .nav-logo,
+.neo-noir .generator .pin-display,
 .neo-noir #what_subdiv h1,
 .neo-noir #what_subdiv table td,
 .neo-noir #what_subdiv table th,
 .neo-noir #what p,
-.neo-noir #api p,
-.neo-noir .home header h1,
-.neo-noir .home header h2,
-.neo-noir .generator .pin-display,
-.neo-noir .nav-links li a,
-.neo-noir .nav-logo
-{
-    color: #fff !important;
-    text-shadow:
-        0 0 8px #0ff,
-        0 0 16px #ff00ff,
-        0 0 24px #0ff,
-        0 0 32px #ff00ff;
+.neo-noir #api p {
+    color: #0ff !important;
+    text-shadow: 0 0 12px #0ff, 0 0 18px #fff;
 }
 
-/* Enhance section backgrounds, box shadows, and contrast */
+/* All major containers: magenta box-shadow and subtle border */
 .neo-noir .sections,
 .neo-noir .properties-subdiv,
-.neo-noir #what_subdiv > div {
+.neo-noir #what_subdiv > div,
+.neo-noir .navbar {
     background: #222 !important;
-    box-shadow:
-        0 0 18px #0ff,
-        0 0 36px #ff00ff,
-        0 2px 12px rgba(0,0,0,0.65);
+    box-shadow: 0 0 18px #ff00ff, 0 2px 20px #ff00ff;
+    border: 1px solid #ff00ff;
 }
 
-/* Generator PIN display glow */
-.neo-noir .generator .pin-display {
-    color: #fff !important;
-    text-shadow:
-        0 0 16px #ff00ff,
-        0 0 32px #0ff,
-        0 0 48px #ff00ff;
-}
-
-/* Button glow */
+/* Buttons: magenta background, cyan text, magenta glow */
 .neo-noir button,
 .neo-noir .spcl-btn {
-    background-color: #1c1c1c !important;
-    color: #fff !important;
+    background-color: #ff00ff !important;
+    color: #0ff !important;
     border: 2px solid #ff00ff !important;
-    box-shadow:
-        0 0 24px #ff00ff,
-        0 0 36px #0ff;
+    box-shadow: 0 0 24px #ff00ff, 0 0 36px #ff00ff;
 }
 
+/* Button hover: swap to cyan background, magenta text */
 .neo-noir button:hover,
 .neo-noir .spcl-btn:hover {
     background-color: #0ff !important;
-    color: #000 !important;
-    box-shadow:
-        0 0 36px #0ff,
-        0 0 48px #ff00ff;
+    color: #ff00ff !important;
+    box-shadow: 0 0 36px #0ff, 0 0 48px #ff00ff;
 }
 
-/* Navbar and logo glow */
-.neo-noir .navbar {
-    background: #222 !important;
-    box-shadow:
-        0 0 20px #0ff,
-        0 0 40px #ff00ff;
+/* Pin display: cyan text, magenta shadow */
+.neo-noir .generator .pin-display {
+    color: #0ff !important;
+    text-shadow: 0 0 18px #ff00ff, 0 0 36px #0ff;
 }
 
+/* Navbar logo: cyan text, magenta shadow */
 .neo-noir .nav-logo {
     color: #0ff !important;
-    text-shadow:
-        0 0 12px #0ff,
-        0 0 24px #ff00ff;
+    text-shadow: 0 0 12px #ff00ff, 0 0 24px #0ff;
 }
 
-/* Links hover effect in navbar */
+/* Links hover: magenta text, cyan background */
 .neo-noir .nav-links li a:hover {
     color: #ff00ff !important;
-    background-color: #333 !important;
-    box-shadow:
-        0 0 18px #ff00ff,
-        0 0 36px #0ff;
-} 
+    background-color: #0ff !important;
+    box-shadow: 0 0 18px #0ff, 0 0 36px #ff00ff;
+}
 
 /* Light Theme */
 .light {
