@@ -64,6 +64,101 @@ html {
     background-color: #1c1c1c;
     color: #fff;
 }
+/* Neo Noir Theme Enhancements */
+
+/* Force all major text to white and add strong magenta/cyan glow */
+.neo-noir, 
+.neo-noir h1, 
+.neo-noir h2, 
+.neo-noir h3, 
+.neo-noir h4, 
+.neo-noir h5, 
+.neo-noir h6, 
+.neo-noir p, 
+.neo-noir .sections,
+.neo-noir .properties-subdiv,
+.neo-noir #what_subdiv h1,
+.neo-noir #what_subdiv table td,
+.neo-noir #what_subdiv table th,
+.neo-noir #what p,
+.neo-noir #api p,
+.neo-noir .home header h1,
+.neo-noir .home header h2,
+.neo-noir .generator .pin-display,
+.neo-noir .nav-links li a,
+.neo-noir .nav-logo
+{
+    color: #fff !important;
+    text-shadow:
+        0 0 8px #0ff,
+        0 0 16px #ff00ff,
+        0 0 24px #0ff,
+        0 0 32px #ff00ff;
+}
+
+/* Enhance section backgrounds, box shadows, and contrast */
+.neo-noir .sections,
+.neo-noir .properties-subdiv,
+.neo-noir #what_subdiv > div {
+    background: #222 !important;
+    box-shadow:
+        0 0 18px #0ff,
+        0 0 36px #ff00ff,
+        0 2px 12px rgba(0,0,0,0.65);
+}
+
+/* Generator PIN display glow */
+.neo-noir .generator .pin-display {
+    color: #fff !important;
+    text-shadow:
+        0 0 16px #ff00ff,
+        0 0 32px #0ff,
+        0 0 48px #ff00ff;
+}
+
+/* Button glow */
+.neo-noir button,
+.neo-noir .spcl-btn {
+    background-color: #1c1c1c !important;
+    color: #fff !important;
+    border: 2px solid #ff00ff !important;
+    box-shadow:
+        0 0 24px #ff00ff,
+        0 0 36px #0ff;
+}
+
+.neo-noir button:hover,
+.neo-noir .spcl-btn:hover {
+    background-color: #0ff !important;
+    color: #000 !important;
+    box-shadow:
+        0 0 36px #0ff,
+        0 0 48px #ff00ff;
+}
+
+/* Navbar and logo glow */
+.neo-noir .navbar {
+    background: #222 !important;
+    box-shadow:
+        0 0 20px #0ff,
+        0 0 40px #ff00ff;
+}
+
+.neo-noir .nav-logo {
+    color: #0ff !important;
+    text-shadow:
+        0 0 12px #0ff,
+        0 0 24px #ff00ff;
+}
+
+/* Links hover effect in navbar */
+.neo-noir .nav-links li a:hover {
+    color: #ff00ff !important;
+    background-color: #333 !important;
+    box-shadow:
+        0 0 18px #ff00ff,
+        0 0 36px #0ff;
+} 
 
 /* Light Theme */
 .light {
