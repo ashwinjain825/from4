@@ -85,6 +85,7 @@ html {
 .neo-noir #what_subdiv > div,
 .neo-noir .navbar {
     background: #222 !important;
+    color: #0ff !important;
     box-shadow: 0 0 18px #ff00ff, 0 2px 20px #ff00ff;
     border: 1px solid #ff00ff;
 }
