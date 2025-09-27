@@ -52,10 +52,53 @@
     .saved-item button:hover {
       background: #c9302c;
     }
+
+    /* Notification Container */
+    #notification-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 9999;
+      font-family: "Inter", sans-serif;
+    }
+
+    /* Notification Base Style */
+    .notification {
+      backdrop-filter: blur(10px);           /* blur the content behind */
+      -webkit-backdrop-filter: blur(5px);
+      min-width: 250px;
+      padding: 14px 20px;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.4s forwards;
+    }
+
+    /* Notification Themes */
+    .success { background: #4CAF50; }
+    .error { background: #F44336; }
+    .info { background: #2196F3; }
+
+    /* Animations */
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateY(20px); }
+    }
   </style>
 </head>
 
 <body>
+  <!-- Notification Container -->
+  <div id="notification-container"></div>
+
   <!-- Map Section -->
   <div id="map"></div>
 
@@ -112,7 +155,7 @@
         <!-- Search by Digipin -->
         <div class="search_location_1" style="display: none;">
           <input type="text" id="digipin" placeholder="Enter Digipin" class="input-field"><br>
-          <button class="black-btn" onclick="getFrom4ByDigipin()">Get From 4</button>
+          <button class="black-btn" onclick="digipinToLatLon(document.getElementById('digipin').value)">Get From 4</button>
         </div>
         <br>
       </div>
@@ -141,14 +184,30 @@
     <span class="material-symbols-outlined" onclick="save_result()">bookmark</span>
   </div>
 
-  <!-- Basic UI Control Scripts -->
+  <!-- Scripts -->
   <script>
+    // ✅ Notification Function
+    function notifyUser(message, type = "info") {
+      const container = document.getElementById("notification-container");
+      const notif = document.createElement("div");
+      notif.classList.add("notification", type);
+      notif.innerText = message;
+      container.appendChild(notif);
+
+      // Auto remove after 3s
+      setTimeout(() => {
+        notif.style.animation = "fadeOut 0.4s forwards";
+        notif.addEventListener("animationend", () => notif.remove());
+      }, 3000);
+    }
+
     // ✅ Tab Switching
     function changeTab(tabId) {
       const tabs = ['current_location', 'search_location', 'decode_location', 'saved_location'];
       tabs.forEach(id => {
         document.getElementById(id).style.display = (id === tabId) ? 'block' : 'none';
       });
+      notifyUser(`Switched to ${tabId.replace('_', ' ')} tab`, "info");
     }
 
     // ✅ Dropdown selection
@@ -156,8 +215,10 @@
       document.querySelectorAll('.search_location_1').forEach(div => div.style.display = 'none');
       if (value === "1") {
         document.querySelectorAll('.search_location_1')[0].style.display = 'block';
+        notifyUser("Search by Coordinates selected", "info");
       } else if (value === "2") {
         document.querySelectorAll('.search_location_1')[1].style.display = 'block';
+        notifyUser("Search by Digipin selected", "info");
       }
     }
   </script>
@@ -169,222 +230,233 @@
   <script type="module">
     import { words } from './scripts/dict.js'; // Word list file must exist
 
-    // Base Ranges
     const latRange = [2.5, 38.5];
     const longRange = [63.5, 99.5];
     const rows = 36, cols = 36;
 
-    // ✅ Divide grid into blocks
-    function getBlock(lat, long, currentLatRange, currentLongRange, r, c) {
-      const latStep = (currentLatRange[1] - currentLatRange[0]) / r;
-      const longStep = (currentLongRange[1] - currentLongRange[0]) / c;
-
-      let row = Math.floor((lat - currentLatRange[0]) / latStep);
-      let col = Math.floor((long - currentLongRange[0]) / longStep);
-
-      row = Math.min(Math.max(row, 0), r - 1);
-      col = Math.min(Math.max(col, 0), c - 1);
-
-      return {
-        blockNum: row * c + col + 1,
-        newLatRange: [
-          currentLatRange[0] + row * latStep,
-          currentLatRange[0] + (row + 1) * latStep
-        ],
-        newLongRange: [
-          currentLongRange[0] + col * longStep,
-          currentLongRange[0] + (col + 1) * longStep
-        ]
-      };
-    }
-
-    // ✅ Generate 4 words from coordinates
-    function getWords(lat, long) {
-      const l1 = getBlock(lat, long, latRange, longRange, rows, cols);
-      const word1 = words[(l1.blockNum - 1) % words.length];
-
-      const l2 = getBlock(lat, long, l1.newLatRange, l1.newLongRange, rows, cols);
-      const word2 = words[(l2.blockNum - 1) % words.length];
-
-      const l3 = getBlock(lat, long, l2.newLatRange, l2.newLongRange, rows, cols);
-      const word3 = words[(l3.blockNum - 1) % words.length];
-
-      const l4 = getBlock(lat, long, l3.newLatRange, l3.newLongRange, 8, 8);
-      const word4 = words[(l4.blockNum - 1) % words.length];
-
-      return [word1, word2, word3, word4];
-    }
-
-    // ✅ Decode function (From words → Lat/Long)
-    function decodeFrom4() {
-      const w1 = document.getElementById("from4_code_to_decode_word1").value.trim();
-      const w2 = document.getElementById("from4_code_to_decode_word2").value.trim();
-      const w3 = document.getElementById("from4_code_to_decode_word3").value.trim();
-      const w4 = document.getElementById("from4_code_to_decode_word4").value.trim();
-
-      if (!w1 || !w2 || !w3 || !w4) {
-        alert("Please enter all 4 words!");
-        return;
-      }
-
-      const i1 = words.indexOf(w1) + 1;
-      const i2 = words.indexOf(w2) + 1;
-      const i3 = words.indexOf(w3) + 1;
-      const i4 = words.indexOf(w4) + 1;
-
-      if (i1 <= 0 || i2 <= 0 || i3 <= 0 || i4 <= 0) {
-        alert("Invalid words entered!");
-        return;
-      }
-
-      // Reconstruct ranges step by step
-      const l1 = reverseBlock(i1, latRange, longRange, rows, cols);
-      const l2 = reverseBlock(i2, l1.latRange, l1.longRange, rows, cols);
-      const l3 = reverseBlock(i3, l2.latRange, l2.longRange, rows, cols);
-      const l4 = reverseBlock(i4, l3.latRange, l3.longRange, 8, 8);
-
-      // Approx midpoint as decoded lat/long
-      const lat = (l4.latRange[0] + l4.latRange[1]) / 2;
-      const lon = (l4.longRange[0] + l4.longRange[1]) / 2;
-
-      // Show result
-      document.getElementById("theResult").innerText = `${lat.toFixed(6)} ° N, ${lon.toFixed(6)} ° E`;
-
-      // Mark on map
-      marker.setLatLng([lat, lon]).bindPopup(`${w1}-${w2}-${w3}-${w4}`).openPopup();
-      map.panTo([lat, lon]);
-      map.setZoom(17);
-    }
-
-    // ✅ Reverse block finder
-    function reverseBlock(index, currentLatRange, currentLongRange, r, c) {
-      const latStep = (currentLatRange[1] - currentLatRange[0]) / r;
-      const longStep = (currentLongRange[1] - currentLongRange[0]) / c;
-
-      const blockNum = index - 1;
-      const row = Math.floor(blockNum / c);
-      const col = blockNum % c;
-
-      return {
-        latRange: [
-          currentLatRange[0] + row * latStep,
-          currentLatRange[0] + (row + 1) * latStep
-        ],
-        longRange: [
-          currentLongRange[0] + col * longStep,
-          currentLongRange[0] + (col + 1) * longStep
-        ]
-      };
-    }
-
-    // ✅ Show From4 Code
-    function showFrom4(lat, long) {
-      const result = getWords(lat, long);
-      const myFrom4 = result.join("-");
-      document.getElementById("theResult").innerText = myFrom4;
-    }
-
-    // ✅ Initialize Leaflet Map
-    const map = L.map('map').setView([28.6139, 77.2090], 5); // Default: New Delhi
+    // ✅ Leaflet map initialization
+    const map = L.map('map').setView([28.6139, 77.2090], 5);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     }).addTo(map);
-
-    // ✅ Marker
     const marker = L.marker([28.6139, 77.2090]).addTo(map);
-
-    // Remove default zoom + add custom zoom
     map.removeControl(map.zoomControl);
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    // ✅ Reverse Geocoding
     function getAddress(lat, lon) {
-      fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
-        .then(res => res.json())
-        .then(data => {
-          marker.setLatLng([lat, lon]) // move marker
-            .bindPopup(data.display_name)
-            .openPopup();
-        })
-        .catch(err => console.error("Error fetching address:", err));
+  fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+    .then(res => res.json())
+    .then(data => {
+      let display_name = "Address not found";
+
+      if (data.address) {
+        // Pick landmark if available, else first part of display_name
+        const landmark = data.name || (data.display_name ? data.display_name.split(",")[0] : "");
+        // Pick one from city, town, village, district
+        const locality = data.address.city || data.address.town || data.address.village || data.address.district || "";
+        const state = data.address.state || "";
+
+        display_name = `${landmark}, ${locality}, ${state}`;
+      }
+
+      marker.setLatLng([lat, lon])
+        .bindPopup(display_name)
+        .openPopup();
+
+      notifyUser("Address fetched successfully", "success");
+    })
+    .catch(err => {
+      console.error("Error fetching address:", err);
+      notifyUser("Failed to fetch address", "error");
+    });
+}
+
+    // ✅ Convert Digipin (4-word From4 code) to Latitude & Longitude
+    function digipinToLatLon(digipin) {
+      const wordsArray = digipin.split("-").map(w => w.trim());
+      if (wordsArray.length !== 4) {
+        notifyUser("Digipin must have 4 words", "error");
+        return null;
+      }
+
+      // Convert words to indexes in words list
+      const indexes = wordsArray.map(word => {
+        const idx = words.indexOf(word) + 1; // +1 because blocks are 1-based
+        if (idx <= 0) {
+          notifyUser(`Invalid word: ${word}`, "error");
+          throw new Error(`Invalid word: ${word}`);
+        }
+        return idx;
+      });
+
+      // Step by step reverse block to get lat/lon
+      let l1 = reverseBlock(indexes[0], latRange, longRange, rows, cols);
+      let l2 = reverseBlock(indexes[1], l1.latRange, l1.longRange, rows, cols);
+      let l3 = reverseBlock(indexes[2], l2.latRange, l2.longRange, rows, cols);
+      let l4 = reverseBlock(indexes[3], l3.latRange, l3.longRange, 8, 8); // final block finer grid
+
+      // Approximate mid-point as final coordinates
+      const lat = (l4.latRange[0] + l4.latRange[1]) / 2;
+      const lon = (l4.longRange[0] + l4.longRange[1]) / 2;
+
+      notifyUser("Digipin converted to coordinates", "success");
+      return { lat, lon };
     }
 
-    // ✅ Fetch Location (Geolocation API)
+    // ✅ Get current location
     function fetchLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           pos => {
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
-
-            // Pan map
+            
             map.panTo([lat, lon]);
             map.setZoom(17);
-
-            // Add marker + address
-            getAddress(lat, lon);
-
-            // Show From4
+            marker.setLatLng([lat, lon]).bindPopup(getAddress(lat, lon)).openPopup();
+            notifyUser("Current location fetched successfully", "success");
             showFrom4(lat, lon);
           },
-          () => console.error("Failed to get location.")
+          () => {
+            notifyUser("Failed to fetch location", "error");
+          }
         );
+      } else {
+        notifyUser("Geolocation not supported by browser", "error");
       }
     }
-
-    // Expose globally
     window.fetchLocation = fetchLocation;
+
+    // ✅ Show From4 code
+    function showFrom4(lat, long) {
+      const result = getWords(lat, long);
+      const myFrom4 = result.join("-");
+      document.getElementById("theResult").innerText = myFrom4;
+      notifyUser("From4 code generated", "success");
+    }
+
+    // ✅ Divide coordinates into a block within a grid
+      function getBlock(lat, long, currentLatRange, currentLongRange, r, c) {
+        const latStep = (currentLatRange[1] - currentLatRange[0]) / r;
+        const longStep = (currentLongRange[1] - currentLongRange[0]) / c;
+
+        let row = Math.floor((lat - currentLatRange[0]) / latStep);
+        let col = Math.floor((long - currentLongRange[0]) / longStep);
+
+        // Clamp values within grid
+        row = Math.min(Math.max(row, 0), r - 1);
+        col = Math.min(Math.max(col, 0), c - 1);
+
+        return {
+          blockNum: row * c + col + 1,  // Block number
+          newLatRange: [
+            currentLatRange[0] + row * latStep,
+            currentLatRange[0] + (row + 1) * latStep
+          ],
+          newLongRange: [
+            currentLongRange[0] + col * longStep,
+            currentLongRange[0] + (col + 1) * longStep
+          ]
+        };
+      }
+
+
+    // ✅ Generate 4 words from coordinates
+    function getWords(lat, long) {
+      const l1 = getBlock(lat, long, latRange, longRange, rows, cols);
+      const word1 = words[(l1.blockNum - 1) % words.length];
+      const l2 = getBlock(lat, long, l1.newLatRange, l1.newLongRange, rows, cols);
+      const word2 = words[(l2.blockNum - 1) % words.length];
+      const l3 = getBlock(lat, long, l2.newLatRange, l2.newLongRange, rows, cols);
+      const word3 = words[(l3.blockNum - 1) % words.length];
+      const l4 = getBlock(lat, long, l3.newLatRange, l3.newLongRange, 8, 8);
+      const word4 = words[(l4.blockNum - 1) % words.length];
+      return [word1, word2, word3, word4];
+    }
+
+    // ✅ Reverse block finder
+    function reverseBlock(index, currentLatRange, currentLongRange, r, c) {
+      const latStep = (currentLatRange[1] - currentLatRange[0]) / r;
+      const longStep = (currentLongRange[1] - currentLongRange[0]) / c;
+      const blockNum = index - 1;
+      const row = Math.floor(blockNum / c);
+      const col = blockNum % c;
+      return {
+        latRange: [currentLatRange[0] + row * latStep, currentLatRange[0] + (row + 1) * latStep],
+        longRange: [currentLongRange[0] + col * longStep, currentLongRange[0] + (col + 1) * longStep]
+      };
+    }
+
+    // ✅ Decode From4
+    function decodeFrom4() {
+      const w1 = document.getElementById("from4_code_to_decode_word1").value.trim();
+      const w2 = document.getElementById("from4_code_to_decode_word2").value.trim();
+      const w3 = document.getElementById("from4_code_to_decode_word3").value.trim();
+      const w4 = document.getElementById("from4_code_to_decode_word4").value.trim();
+      if (!w1 || !w2 || !w3 || !w4) {
+        notifyUser("Please enter all 4 words!", "error");
+        return;
+      }
+      const i1 = words.indexOf(w1) + 1;
+      const i2 = words.indexOf(w2) + 1;
+      const i3 = words.indexOf(w3) + 1;
+      const i4 = words.indexOf(w4) + 1;
+      if (i1 <= 0 || i2 <= 0 || i3 <= 0 || i4 <= 0) {
+        notifyUser("Invalid words entered!", "error");
+        return;
+      }
+
+      const l1 = reverseBlock(i1, latRange, longRange, rows, cols);
+      const l2 = reverseBlock(i2, l1.latRange, l1.longRange, rows, cols);
+      const l3 = reverseBlock(i3, l2.latRange, l2.longRange, rows, cols);
+      const l4 = reverseBlock(i4, l3.latRange, l3.longRange, 8, 8);
+      const lat = (l4.latRange[0] + l4.latRange[1]) / 2;
+      const lon = (l4.longRange[0] + l4.longRange[1]) / 2;
+
+      document.getElementById("theResult").innerText = `${lat.toFixed(6)} ° N, ${lon.toFixed(6)} ° E`;
+      marker.setLatLng([lat, lon]).bindPopup(getAddress(lat, lon)).openPopup();
+      map.panTo([lat, lon]);
+      map.setZoom(17);
+      notifyUser("From4 code decoded successfully", "success");
+    }
     window.decodeFrom4 = decodeFrom4;
   </script>
 
-  <!-- Local Storage: Save + Load + Delete -->
+  <!-- Local Storage + Result Actions -->
   <script>
-    // ✅ Save current result with timestamp
+    // ✅ Save Result
     function save_result() {
       let theResult = document.getElementById("theResult").innerText;
-      if (!theResult || theResult === "The Result") return;
+      if (!theResult || theResult === "The Result") return notifyUser("Nothing to save", "error");
 
       let saved_data;
-      try {
-        saved_data = JSON.parse(localStorage.getItem("saved_data")) || [];
-        if (!Array.isArray(saved_data)) saved_data = [];
-      } catch (e) {
-        saved_data = [];
-      }
+      try { saved_data = JSON.parse(localStorage.getItem("saved_data")) || []; } 
+      catch (e) { saved_data = []; }
 
-      let entry = {
-        value: theResult,
-        date: new Date().toLocaleString()
-      };
-      saved_data.push(entry);
-
+      saved_data.push({ value: theResult, date: new Date().toLocaleString() });
       localStorage.setItem("saved_data", JSON.stringify(saved_data));
       render_saved_data();
+      notifyUser("Result saved successfully", "success");
     }
 
-    // ✅ Delete saved entry
+    // ✅ Delete Saved Entry
     function delete_saved(index) {
       let saved_data = JSON.parse(localStorage.getItem("saved_data")) || [];
       saved_data.splice(index, 1);
       localStorage.setItem("saved_data", JSON.stringify(saved_data));
       render_saved_data();
+      notifyUser("Saved entry deleted", "info");
     }
 
-    // ✅ Render saved data in UI
+    // ✅ Render Saved Data
     function render_saved_data() {
       let saved_data = JSON.parse(localStorage.getItem("saved_data")) || [];
       let container = document.querySelector(".saved_data_display");
       container.innerHTML = "";
-
-      if (saved_data.length === 0) {
-        container.innerHTML = "<p>No saved data</p>";
-        return;
-      }
-
+      if (saved_data.length === 0) { container.innerHTML = "<p>No saved data</p>"; return; }
       saved_data.forEach((item, index) => {
         let div = document.createElement("div");
         div.className = "saved-item";
-
         div.innerHTML = `
           <p><b>${item.value}</b></p>
           <small>${item.date}</small><br>
@@ -394,40 +466,35 @@
       });
     }
 
-    // ✅ Auto-load saved data on website load
+    // ✅ Copy Result
+    function copyResult() {
+      const resultText = document.getElementById("theResult").innerText;
+      navigator.clipboard.writeText(resultText).then(() => {
+        notifyUser("Result copied to clipboard", "success");
+      }).catch(err => {
+        notifyUser("Failed to copy text", "error");
+      });
+    }
+
+    // ✅ Share Result
+    function shareResult() {
+      const resultText = document.getElementById("theResult").innerText;
+      const shareText = `Hey my From4 Code is:\n${resultText}\n\nFind yours at from4.vercel.app`;
+      if (navigator.share) {
+        navigator.share({ title: 'From4 Result', text: shareText })
+          .then(() => notifyUser("Shared successfully", "success"))
+          .catch(err => notifyUser("Share failed", "error"));
+      } else {
+        notifyUser("Web Share API not supported", "error");
+      }
+    }
+
+    // ✅ Auto-load saved data
     window.onload = function () {
       render_saved_data();
     };
 
-    // ✅ Button fallback
-    function get_saved_data() {
-      render_saved_data();
-    }
-
-    function copyResult(){
-      const resultText = document.getElementById("theResult").innerText;
-      navigator.clipboard.writeText(resultText).then(() => {
-        alert("Result copied to clipboard!");
-      }).catch(err => {
-        console.error("Failed to copy text: ", err);
-      });
-    }
-
-    function shareResult(){
-      const resultText = document.getElementById("theResult").innerText;
-      const shareText = `Hey my From 4 Code is:\n${resultText}\n\nFind yours at from4.vercel.app`;
-      if (navigator.share) {
-        navigator.share({
-          title: 'From4 Result',
-          text: shareText,
-        }).then(() => {
-          console.log('Thanks for sharing!');
-        })
-        .catch(console.error);
-      } else {
-        alert("Web Share API not supported in this browser.");
-      }
-    }
+    
   </script>
 </body>
 </html>
