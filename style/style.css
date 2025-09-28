@@ -210,6 +210,18 @@ body.light select {
 }
 
 
+/* Light theme: property sub div background and text */
+body.light .properties-subdiv {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: 0 0 6px #aaa;
+}
+body.light .properties-subdiv h1,
+body.light .properties-subdiv p {
+    color: #000 !important;
+    text-shadow: none;
+}
+
 /* ============================= */
 /* NAVBAR */
 /* ============================= */
