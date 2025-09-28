@@ -156,9 +156,9 @@ html {
 }
 
 .spcl-btn,
-.neo-noir .spcl-btn,
-.properties-subdiv,
-.neo-noir .properties-subdiv {
+.neo-noir .spcl-btn
+
+{
     box-shadow: 0 0 8px #ff00ff, 0 2px 5px #ff00ff !important;
 }
 
