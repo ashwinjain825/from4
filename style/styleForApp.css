@@ -2,25 +2,6 @@
     --ui-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; 
 }
 
-html{
-    width: 100%;
-    height: 100vh;
-}
-
-#map{
-    height: 100%;
-    width: 100%;
-    top: 0;
-    z-index: 1;
-}
-  
-
-body { 
-    height: 100vh;
-    font-family: var(--ui-font); 
-}
-
-
 *{
     padding: 0;
     margin: 0;
@@ -28,6 +9,28 @@ body {
     font-family: var(--ui-font);
     transition: .3s ease;
 }
+
+html, body {
+  height: 100%;   /* instead of 100vh */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--ui-font); 
+  overflow: hidden;  /* prevents scrollbars that shrink map */
+}
+
+#map {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 1000px;   /* full viewport */
+  width: 100%;
+  z-index: 1;
+}
+
+
+
+
 
 .header{
     background: rgba(255, 255, 255, 0.6); /* translucent white */
@@ -69,7 +72,6 @@ body {
     bottom: 20px;
     left: 50%;              /* move to horizontal center */
     transform: translateX(-50%); /* shift back by half width */
-    
     width: 50%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -141,15 +143,30 @@ body {
 
 }
 
+#search_location{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#search_location div{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
 
 
 #search_location input{
-    margin: 5px;
+    width: calc(50% - 20px);
+    background: transparent;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid gray;
-    width: calc(30% - 20px);
 }
+
 
 .result{
     background: rgba(255, 255, 255, 0.6); /* translucent white */
@@ -195,6 +212,7 @@ body {
     text-align: center;
     font-size: 1rem;
     font-weight: bold;
+    background: transparent;
 }
 
 .content-info{
@@ -206,6 +224,47 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .content {
+        width: 90%;
+        font-size: 1rem;
+    }
+
+    .select-style {
+        width: 50%;
+        min-width: 150px;
+    }
+
+    #search_location input {
+        width: calc(50% - 20px);
+    }
+
+    .input-field-decode {
+        width: calc(50% - 20px);
+        min-width: 100px;
+    }
+
+    .result{
+        top: calc(100% - 270px);
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.8rem;
+        height: 60px;
+        width: 90%;
+        justify-content: center;
+    }
+
+    .result span{
+        font-size: 1rem;
+    }
+
+    .black-btn{
+        padding: 8px;
+        font-size: 0.8rem;  
+    }
+    
 }
 
 
