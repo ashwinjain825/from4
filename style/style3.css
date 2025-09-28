@@ -30,7 +30,7 @@ body.light {
   padding: 1rem 2rem;
   background: linear-gradient(90deg, #1f1f1f, #3d3d3d);
   color: #fff;
-  box-shadow: 0 0 10px #ff00ff, 0 0 20px #00eaff;
+  box-shadow: 0 0 5px #ff00ff, 0 0 20px #00eaff;
 }
 
 .nav-links {
