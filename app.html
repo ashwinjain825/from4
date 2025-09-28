@@ -405,10 +405,10 @@
 
     // Decode From4
     function decodeFrom4() {
-      const w1 = document.getElementById("from4_code_to_decode_word1").value.trim();
-      const w2 = document.getElementById("from4_code_to_decode_word2").value.trim();
-      const w3 = document.getElementById("from4_code_to_decode_word3").value.trim();
-      const w4 = document.getElementById("from4_code_to_decode_word4").value.trim();
+      const w1 = document.getElementById("from4_code_to_decode_word1").value.trim().toLowerCase().replace(/\s+/g, "");
+      const w2 = document.getElementById("from4_code_to_decode_word2").value.trim().toLowerCase().replace(/\s+/g, "");
+      const w3 = document.getElementById("from4_code_to_decode_word3").value.trim().toLowerCase().replace(/\s+/g, "");
+      const w4 = document.getElementById("from4_code_to_decode_word4").value.trim().toLowerCase().replace(/\s+/g, "");
       if (!w1 || !w2 || !w3 || !w4) {
         notifyUser("Please enter all 4 words!", "error");
         return;
