@@ -104,7 +104,7 @@ html {
 .neo-noir .spcl-btn:hover {
     background-color: #0ff !important;
     color: #ff00ff !important;
-    box-shadow: 0 0 36px #0ff, 0 0 48px #ff00ff;
+    box-shadow: 0 0 8px #0ff, 0 0 10px #ff00ff;
 }
 
 /* Pin display: cyan text, magenta shadow */
@@ -155,12 +155,7 @@ html {
     text-shadow: 0 0 2px #0ff;
 }
 
-.spcl-btn,
-.neo-noir .spcl-btn
 
-{
-    box-shadow: 0 0 8px #ff00ff, 0 2px 5px #ff00ff !important;
-}
 
 /* Light Theme */
 .light {
